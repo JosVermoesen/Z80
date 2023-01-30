@@ -2,9 +2,10 @@
 
  ORG 0100H
 
-CPM EQU 0005H
-DFCB EQU 005CH
-FCBEXT EQU 0065H
+CPM    EQU 0005H ;
+ESC    EQU 1BH ;
+DFCB   EQU 005CH ;
+FCBEXT EQU 0065H ;
 
 DUMP
  LD DE,DFCB
@@ -152,23 +153,5 @@ PAGECNT
 OUTBUF
  DEFS 0004H
  END
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

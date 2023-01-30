@@ -4,6 +4,7 @@
 ;-------------------------------------------------------------------------
  PRINT_CHAR EQU   2 ; BDOS write a character to the console
  BDOS       EQU   5 ; Jump vector to BDOS
+ ESC      EQU   1BH
 
 ;-------------------------------------------------------------------------
 ; Program loads and enters at 0100h
