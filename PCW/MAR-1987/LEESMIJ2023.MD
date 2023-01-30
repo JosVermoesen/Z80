@@ -1,7 +1,7 @@
-INSTRUCTIES VOOR PCW CP/M BOX
+# INSTRUCTIES VOOR PCW CP/M BOX
 
-1. MAAK EEN 'PROGRAMMA START .DSK' VOOR DRIVE B:
----------------------------------------------
+## MAAK EEN 'PROGRAMMA START .DSK' VOOR DRIVE B:
+
 - Duidt voor opstart van CP/M BOX voor A: het PCW 8256 [B] CPM PLUS.dsk
   (of een kopij ervan) aan, alsook een blanco CF2DD .DSK voor drive B:
 - Zorg zowel voor A: als voor B: dat de optie DUMP aangevinkt staat
@@ -9,11 +9,11 @@ INSTRUCTIES VOOR PCW CP/M BOX
 - Copiêer met PIP: PIP zelf, SUBMIT, SETKEYS, SETDEF en BASIC naar B:
 
   A>PIP  
-    *b:=a:pip.com
-    *b:=a:submit.com
-    *b:=a:basic.com
-    *b:=a:setkeys.com
-    *b:=a:setdef.com
+   *b:=a:pip.com
+  *b:=a:submit.com
+  *b:=a:basic.com
+  *b:=a:setkeys.com
+  \*b:=a:setdef.com
 
   ENTER/RETURN om PIP te verlaten
 
@@ -24,16 +24,16 @@ INSTRUCTIES VOOR PCW CP/M BOX
 
 - Vervang opstart .DSK A: door distributie .DSK kant A
   Tijp in: b:submit 8512a en sluit af met ENTER/RETURN
-- Vervang distributie  .DSK kant A door .DSK voor kant B
+- Vervang distributie .DSK kant A door .DSK voor kant B
   Tijp in: b:submit 8512b en sluit af met ENTER/RETURN
 
-2. DATA .DSK VIRTUELE A: EN B:
------------------------------
+## DATA .DSK VIRTUELE A: EN B:
+
 - VOORZIE EEN BLANCO CF2 VIRTUEEL .DSK BESTAND VOOR DRIVE A:
 - VOORZIE EEN BLANCO CF2DD .DSK BESTAND VOOR DRIVE B:
 
-3. OPSTART PROGRAMMA
---------------------
+## OPSTART PROGRAMMA
+
 - Start de PCW IN CP/M BOX (CP/M PLUS BOOT) via
   PCW 8256 [B] CPM PLUS.dsk OF EEN KOPIJ ERVAN!
 - Breng 'programma start .DSK' in drive b:
@@ -45,8 +45,8 @@ INSTRUCTIES VOOR PCW CP/M BOX
   vervolg!
 - Indien data diskettes leeg blijken, kan U een nieuw bedrijf opstarten
 
-4. GOED OM WETEN
-----------------
+## GOED OM WETEN
+
 - Tik kortstondig elke toets op toetsenbord. De emulator kan
   anders de buffer voor toetsaanslagen in MALLARD BASIC niet aan.
   Vooral wanneer U via menu options een en ander gaat uitproberen!

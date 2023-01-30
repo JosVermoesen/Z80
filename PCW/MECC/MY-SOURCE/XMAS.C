@@ -16,13 +16,18 @@
 	You should have received a copy of the GNU General Public License
 	along with this program; if not, write to the Free Software
 	Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+    hint:
+    Use a submit batch file to compile
+     cc xmas
+     ccopt xmas    
+     zsm xmas
+     hextocom xmas
+     xmas
 */
 
 /* Some defs. to save memory
 */
-#define CC_NO_MUL    // To exclude MULTIPLICATION code.
-#define CC_NO_DIV    // To exclude DIVISION & MODULUS code.
-#define CC_NO_SWITCH // To exclude SWITCH code.
 #define CC_NO_ARGS   // To exclude ARGC & ARGV code.
 
 /* Standard libraries
