@@ -1,0 +1,9 @@
+; http://map.grauw.nl/resources/z80instr.php
+
+; 300 BAUDS 8,N,1
+; 1.79 MHZ
+; WHAT SHOULD BE THE DELAY BETWEEN THE DIFFERENT CHARACTERS?
+
+ CALL DELAY
+
+DELAY ??
