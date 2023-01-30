@@ -1,0 +1,65 @@
+.Z80
+ TITLE 'HMSG - Created by VSOFT'
+
+;-------------------------------------------------------------------------
+; CP/M Demo Program
+;-------------------------------------------------------------------------
+BDOS      EQU   5           ; Jump vector to BDOS
+WRTLINE   EQU   9           ; BDOS write a line to the console
+CR        EQU   13          ; ASCII carriage return
+LF        EQU   10          ; ASCII line feed
+ESC       EQU   27          
+
+;-------------------------------------------------------------------------
+; Program loads and enters at 0100h
+;-------------------------------------------------------------------------
+ ORG 0100H          ; CP/M expects programs at 0100h
+
+MAIN
+ LD DE,CLS          ; Load CLS clear screen ESC string
+ LD C,WRTLINE       ; Set register C to write clear screen ESC string
+ CALL BDOS
+
+ LD DE,HHEX         ; Character by character HEX demo
+ LD C,WRTLINE
+ CALL BDOS
+
+ LD DE,HCHAR        ; Character by character CHAR demo
+ LD C,WRTLINE
+ CALL BDOS
+
+ LD DE,HSTR         ; One string with CR_LF at start and end
+ LD C,WRTLINE
+ CALL BDOS 
+
+ LD DE,WTHEVER
+ LD C,WRTLINE
+ CALL BDOS 
+
+ RET 
+
+HHEX: 
+ ; Hello Z80-MBC2 World! (string in HEX) 
+ DEFB 48H,65H,6CH,6CH,6FH,20H
+ DEFB 5AH,38H,30H,2DH,4DH,42H,43H,32H,20H
+ DEFB 57H,6FH,72H,6CH,64H,21H,24H ; End string always with 24H ($)
+ 
+HCHAR: 
+ ; Hello Z80-MBC2 World! (CHARS)
+ DEFB CR,LF,'A','n','o','t','h','e','r',' ','h','e','l','l','o',' '
+ DEFB 'Z','8','0','-','M','B','C','2',' '
+ DEFB 'W','o','r','l','d','!','$'
+
+HSTR:
+ DB CR,LF,'That is all this program does folks!',CR,LF,CR,LF,'$'
+
+WTHEVER:
+ DB 'Whatever...!','$'
+
+CLS: ; https://en.wikipedia.org/wiki/ANSI_escape_code#CP/M
+     ; DB 1Bh,"[H",1Bh,"[2J$"
+     ; For Amstrad PCW
+     DB ESC,"H",ESC,"E$"
+     
+END
+

@@ -1,0 +1,23 @@
+; Print "Hello world!" using BDOS function.
+
+;-------------------------------------------------------------------------
+; CP/M Demo Program
+;-------------------------------------------------------------------------
+BDOS      EQU   5           ; Jump vector to BDOS
+WRTLINE   EQU   9           ; BDOS write a line to the console
+
+;-------------------------------------------------------------------------
+; Program loads and enters at 0100h
+;-------------------------------------------------------------------------
+ ORG 0100H          ; CP/M expects programs at 0100h
+
+ LD DE,HELLOW  ; Load the address of the label "HelloT" into DE.
+ LD C,WRTLINE  ; C must contain function number for write line
+ CALL BDOS   ; Call the function 9 (Print function).
+ RET    ; Back to the MSX-DOS environment.
+
+HELLOW:    ; Set the current address into label HelloT. (text pointer)
+
+ DB "Hello world!$" ; The character $ (24h) indicates the end of text for function 9.
+END ; Do not forget end for Z80ASM compiler
+

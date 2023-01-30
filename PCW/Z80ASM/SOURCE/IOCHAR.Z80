@@ -1,0 +1,112 @@
+.Z80
+ TITLE 'IOCHAR - Created by VSOFT'
+
+;-------------------------------------------------------------------------
+; CP/M Demo Program
+;-------------------------------------------------------------------------
+
+; ASCII CHARACTERS
+
+ESC          EQU   1BH
+CR      EQU      0Dh      ; CARRIAGE RETURN
+LF      EQU      0Ah      ; LINE FEED
+CTRLZ   EQU      1Ah      ; OPERATOR INTERRUPT
+
+; CP/M FUNCTIONS AND ADDRESSES
+
+RCHAR  EQU   1     ; READ CON: INTO (A)
+WCHAR       EQU   2     ; WRITE (A) TO CON:
+CPRINTS      EQU   9     ; PRINT STRING WITH $ TERMINATOR
+BDOS         EQU   5     ; SYSTEM CALL ENTRY (BDOS)
+
+;-------------------------------------------------------------------------
+; Program loads and enters at 0100h
+;-------------------------------------------------------------------------
+ ORG 0100H          ; START OF TRANS. PROGRAM AREA
+
+
+; Main consol output routine using CPM.
+; All registers unchanged
+
+MAIN:
+       LD DE,CLS  ; Load CLS clear screen ESC string
+       LD C,CPRINTS  ; Write clear screen ESC string
+       CALL BDOS
+
+       LD DE,INMSG
+       LD C,CPRINTS
+       CALL BDOS
+
+       LD C,RCHAR  ; Character to get in [C].
+ CALL BDOS
+ LD A,C
+
+ PUSH  AF
+       PUSH  BC
+       PUSH  DE
+       LD DE,OUTMSG
+       LD C,CPRINTS
+       CALL BDOS
+ POP   DE
+       POP   BC
+       POP   AF
+
+       LD E,C
+ LD C,WCHAR  ; Character to be sent in [C].
+       CALL BDOS
+ LD A,C
+
+ PUSH  AF
+       PUSH  BC
+       PUSH  DE
+ LD DE,HEXMSG
+       LD C,CPRINTS
+       CALL BDOS
+ POP   DE
+       POP   BC
+       POP   AF
+
+ PUSH AF
+ SRL A
+      SRL A
+      SRL A
+      SRL A
+      CALL CONHEX
+      LD (HEX),A
+      POP AF
+      CALL CONHEX
+      LD (HEX+1),A
+
+ LD C,CPRINTS  ;WRITESTR
+      LD DE,HEX
+      CALL BDOS
+       
+       RET
+
+CONHEX:
+     AND 0FH
+     ADD A,30H
+     CP 3Ah
+     JP M,OUT_
+     ADD A,7
+
+OUT_:
+     RET
+
+HEX:
+     DB "00",CR,LF,"$"
+
+CLS:
+ DB ESC,"H",ESC,"E$" ; For Amstrad PCW
+
+INMSG:
+ DB 'Your character of choise: $'
+
+OUTMSG:
+ DB CR,LF,'You chose: $'
+
+HEXMSG:
+ DB CR,LF,'In HEX: $'
+
+END
+

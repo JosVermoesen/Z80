@@ -1,0 +1,65 @@
+.Z80
+;-------------------------------------------------------------------------
+; CP/M Demo Program
+;-------------------------------------------------------------------------
+ ESC      EQU   1BH
+ BDOS     EQU   5H          ; Jump vector to BDOS
+ RCHAR    EQU   1H          ; READ CHAR FROM CONSOLE INTO ACCUMULATOR
+ PCHAR    EQU   2H          ; BDOS write a character to the console
+ PSTRING  EQU   9H          ; BDOS write a string to the console
+ CR       EQU   13          ; ASCII carriage return
+ LF       EQU   10          ; ASCII line feed
+
+;-------------------------------------------------------------------------
+; Program loads and enters at 0100h
+;-------------------------------------------------------------------------
+ ORG 0100H        ; CP/M expects programs at 0100h
+
+; FOR MORE INFO ON ASCII CHARACTERS AND ANSI ESCAPE CODES FOR TERMINAL USE
+; CHECK https://en.wikipedia.org/wiki/ANSI_escape_code#CP/M
+; AND https://en.wikipedia.org/wiki/ASCII
+
+MAIN:
+ LD DE,CLS        ; LOAD CLS STRING INTO REGISTER PAIR DE
+ LD C,PSTRING     ; PREPARE TO WRITE THE CLS STRING
+ CALL BDOS
+
+ LD A,32          ; START AT 32, ASCII CODE FOR 'SPACE' (20H)
+ LD B,126         ; SET B TO VALUE OF LAST ASCII CODE TO SHOW (7EH)
+ CALL ASCIILOOP
+
+ RET              ; RET IN LABEL EXITP CANNOT BE USED IN Z80ASM IT SEEMS...
+                  ; SO USE RET DIRECTLY TO AVOID STRANGE BEHAVIOUR!
+
+ASCIILOOP:
+ PUSH  AF         ; SAVE REGISTERS BEFORE USING CPM IN/OUT FUNCTIONS
+ PUSH  BC         ; DEFINED ABOVE (PCHAR, PSTRING, RCHAR)
+ PUSH  DE         ; SEE ALSO POP IN REVERSE FOLOWING LINES!
+
+ LD E,A           ; LOAD VALUE OF ASCII CHARACTER INTO REGISTER E
+ LD C,PCHAR       ; USE REGISTER C TO SET PRINT_CHARACTER READY FOR CPM
+ CALL BDOS        ; LET CPM DO THE JOB
+
+ POP DE           ; GET REGISTER VALUES BACK SAVED BEFORE TO RESUME
+ POP BC           ;
+ POP AF           ; BE SURE GETTING BACK IN REVERSE
+
+ ADD A,1          ; VALUE 33 AFTER SPACE SHOULD BE ! (EXCLAMATION MARK)
+                  ; NEXT 34 WILL BE " ... ADDING TILL VALUE OF B REACHED
+ CP B             ; COMPARE REACHING A WITH VALUE 126
+ JP Z,EXITP       ; Z FLAG IS SET WHEN VALUE A = B VALUE
+                  ; IF SO, THEN JUMP TO LABEL EXITP OTHERWISE RESUME NEXT
+
+ JP ASCIILOOP     ; KEEP ON LOOPING (Z FLAG IS NOT SET)
+
+
+EXITP:
+ RET              ; LABEL WITH RET IS USEFULL WHEN MORE LABELS TO CALL
+
+CLS:
+ DB ESC,"H",ESC,"E$" ; For Amstrad PCW
+
+END
+
+
+

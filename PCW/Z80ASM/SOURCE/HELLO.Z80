@@ -1,0 +1,66 @@
+.Z80
+;-------------------------------------------------------------------------
+; CP/M Demo Program
+;-------------------------------------------------------------------------
+ PRINT_CHAR EQU   2 ; BDOS write a character to the console
+ BDOS       EQU   5 ; Jump vector to BDOS
+
+;-------------------------------------------------------------------------
+; Program loads and enters at 0100h
+;-------------------------------------------------------------------------
+ ORG 0100H         ; CP/M expects programs at 0100h
+
+MAIN:
+ LD E,'H'
+     LD C,PRINT_CHAR
+     CALL BDOS
+
+     LD E,'E'
+     LD C,PRINT_CHAR
+     CALL BDOS
+
+     LD E,'L'
+     LD C,PRINT_CHAR
+     CALL BDOS
+
+     LD E,'L'
+     LD C,PRINT_CHAR
+     CALL BDOS
+
+     LD E,'O'
+     LD C,PRINT_CHAR
+     CALL BDOS
+
+     LD E,' '
+     LD C,PRINT_CHAR
+     CALL BDOS
+
+     LD E,'W'
+     LD C,PRINT_CHAR
+     CALL BDOS
+
+     LD E,'O'
+     LD C,PRINT_CHAR
+     CALL BDOS
+
+     LD E,'R'
+     LD C,PRINT_CHAR
+     CALL BDOS
+
+     LD E,'L'
+     LD C,PRINT_CHAR
+     CALL BDOS
+
+ LD E,'D'
+     LD C,PRINT_CHAR
+     CALL BDOS
+
+     LD E,'!'
+     LD C,PRINT_CHAR
+     CALL BDOS
+
+     RET
+
+END
+
+
