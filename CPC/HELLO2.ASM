@@ -1,8 +1,5 @@
 ORG &8000  ;start of program
 
-
-
-
 ORG &8100
 
 LD HL,MESSAGE
@@ -27,7 +24,7 @@ PRINT_STRING:
  JR PRINT_STRING
   ;repeat until end of message
 
-MESSAGE: DB 'Hello World 2022!',255
+MESSAGE: DB 'Hello World 2023!',255
  ;message to print
 
 NewLine:
