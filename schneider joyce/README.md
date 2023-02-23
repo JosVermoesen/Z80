@@ -1,4 +1,4 @@
-# Amstrad PCW - Sschneider JOYCE
+# Amstrad PCW - Schneider JOYCE
 
 ## .dsk image tools
 
