@@ -25,7 +25,8 @@
  ORG 0100H            ; CP/M expects programs at 0100h
 
  MAIN:
-  LD DE,CLSPCW        ; LOAD CLS STRING INTO REGISTER PAIR DE
+  LD DE,CLS           ; LOAD CLS STRING INTO REGISTER PAIR DE
+  ; LD DE,CLSPCW        ; LOAD CLSPCW STRING INTO REGISTER PAIR DE
   LD C,PSTRING        ; PREPARE TO WRITE THE CLS STRING
   CALL CPM
 
@@ -64,5 +65,8 @@
   DB ESC,"H",ESC,"E$"
 
  END
+
+ CLS:                 ; https://en.wikipedia.org/wiki/ANSI_escape_code#CP/M
+     DB 1BH,"[H",1BH,"[2J$"
 
 
