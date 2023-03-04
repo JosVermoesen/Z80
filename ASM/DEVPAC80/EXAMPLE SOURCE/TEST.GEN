@@ -1,0 +1,22 @@
+*List on
+
+*H A Simple Program
+
+;Some equates
+
+BDOS   EQU 5
+SPRINT EQU 9
+
+;The code, automatically ORGed at #100
+
+	LD DE,MSG    ; print a message
+	LD C,SPRINT
+	CALL BDOS    ; by calling the CP/M BDOS
+	rst	0		 ; return to calling program or CP/M
+
+;Any old message
+
+MSG
+	defm	"HiSoft Devpac80 Version 2!$"
+g the CP/M BDOS
+	rst	0		 ; return to calling program or CP/

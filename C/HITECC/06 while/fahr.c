@@ -6,7 +6,7 @@
 
 	To compile with HITEC C:
 
-	c fahr
+	c fahr.c
 */
 #include <stdio.h>
 

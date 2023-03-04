@@ -5,7 +5,7 @@
 
     To compile with HITEC C:
 
-    c xmastree
+    c xmastree.c
 */
 #include <stdio.h>
 

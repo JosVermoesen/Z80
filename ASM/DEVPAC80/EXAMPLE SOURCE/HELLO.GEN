@@ -1,0 +1,69 @@
+.Z80
+;-------------------------------------------------------------------------
+; CP/M Demo Program
+;-------------------------------------------------------------------------
+; REMEMBER WITH DEVPAC80 EQU DEFINITIONS SHOULD BE
+; WITHOUT SPACE ON THE LEFT. INSTEAD OF RET OR END
+; USE RST 0 WITH AT LEAST ONE SPACE ON THE LEFT...
+; ALSO DO NOT USE ORG 0100H AS DEVPAC80 DOES IT
+; AUTOMATICALLY. USING ORG IS ALLOWED FOR HIGH MEM
+;--------------------------------------------------
+PCHAR EQU 2 ; BDOS write a character to the console
+BDOS  EQU 5 ; Jump vector to BDOS
+;-------------------------------------------------------------------------
+; Program loads and enters at 0100h
+;-------------------------------------------------------------------------
+; ORG 0100H         ; CP/M expects programs at 0100h
+
+MAIN:
+    LD E,'H'
+    LD C,PCHAR
+    CALL BDOS
+
+    LD E,'E'
+    LD C,PCHAR
+    CALL BDOS
+
+    LD E,'L'
+    LD C,PCHAR
+    CALL BDOS
+
+    LD E,'L'
+    LD C,PCHAR
+    CALL BDOS
+
+    LD E,'O'
+    LD C,PCHAR
+    CALL BDOS
+
+    LD E,' '
+    LD C,PCHAR
+    CALL BDOS
+
+    LD E,'W'
+    LD C,PCHAR
+    CALL BDOS
+
+    LD E,'O'
+    LD C,PCHAR
+    CALL BDOS
+
+    LD E,'R'
+    LD C,PCHAR
+    CALL BDOS
+
+    LD E,'L'
+    LD C,PCHAR
+    CALL BDOS
+
+    LD E,'D'
+    LD C,PCHAR
+    CALL BDOS
+
+    LD E,'!'
+    LD C,PCHAR
+    CALL BDOS
+
+ RST 0
+
+CHAR
