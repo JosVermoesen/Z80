@@ -1,0 +1,126 @@
+To backup up your HiSoft master disk please use
+DISCKIT from your CP/M disk as described in your
+CP/M manual.
+
+We have supplied the file KEYS.WP to let you use
+the +3 cursorkeys in our editor without
+re-installing it. To use this use
+
+SETKEYS KEYS.WP
+
+from the CP/M prompt. SETKEYS in on your CP/M
+master disk.
+
+The editor has been set up to use the 51x23 mode 
+of the +3 it is ready to use.
+
+GEN80 +3 version
+================
+
+There is an extra top of file option A. useing
+*A+ on the first line of your textfile or A+
+on the command line will cause the assembler
+to include a valid Plus 3 header on the front of
+any binary file produced. The loader address for
+the header is taken from the first ORG within
+your program. If you do not use the A+ option
+then no header is added to the binary file.
+
+Also providing is P3HEAD.COM which puts a +3
+header on an existing .COM file  but does not
+insert a default load address. Use it,under CP/M
+like
+
+P3HEAD FILE.COM
+
+to add a header to FILE.COM.
+ 
+********************************
+Relates to Version 2.04 of GEN80
+       and Version 2.7  of PMON
+********************************
+
+******************
+GEN80 Version 2.05
+******************
+
+Hex output for BASIC, Pascal etc.
+---------------------------------
+
+Use the *J+ command to turn this
+output on or *J- to turn it off.
+Default is off. When on, the 
+assembler will generate hex
+numbers to a file name.CDE, where
+name is the object filename. You
+can choose the length of each line
+by using GEN80INS. You can also
+choose what should go at the start
+of each line, at the end of each 
+line, the prefix to the hex number and
+the separator of each hex number. 
+Use GEN80INS for all these options.
+The assmebler command *O nnnn allows
+you to have decimal line numbers
+(starting at nnnn, increasing by 10)
+at the start of each line.
+
+Example for Mallard BASIC:
+
+*J+
+*O 1000   ;on a separate line
+
+	ld	hl,label
+	ret
+label	defm	"Test"
+
+Using GEN80INS set:
+
+Length: 80
+Header: DATA 
+Trailer: (none)
+Hex prefix: &H
+Hex separator: ,
+
+GEN80 TEST
+
+then gives a file TEST.CDE which
+looks like:
+
+1000 DATA &H21,&H04,&H01,&HC9,&H54,&H65,&H73,&H74
+
+GEN80INS has been modified so that
+the above features may be installed.
+Type [CTRL]-D or [ALT]-D to delete
+the header, trailer or hex prefix
+(identifier) when using the 
+installation program. Otherwise,
+enter the text you want (up to 12
+characters for the header and
+trailer or 6 characters for the hex
+prefix) followed by [ENTER].
+
+******************
+GEN80 Version 2.06
+******************
+
+1. Previously, when assembling with option F
+(force second pass), doubly-defined symbols
+would not be detected. This has been fixed.
+
+2. Previously, the name of the module output
+to any .REL file was padded right with spaces
+to ensure a 6 character length. This can
+be tedious when used with LIB. We have
+changed this so that the correct length (up
+to 6 characters) is always output.
+
+
+*******************************
+HiSoft, Greenfield. 8 June 1988.
+*******************************
+rs) is always output.
+
+
+*******************************
+HiSoft, Greenfi
