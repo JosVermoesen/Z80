@@ -6,83 +6,78 @@
 ;-------------------------------------------------------------------------
 
 ; ASCII CHARACTERS
-
-ESC   EQU 1BH
-CR    EQU 0DH  ; CARRIAGE RETURN
-LF    EQU 0AH  ; LINE FEED
-CTRLZ EQU 1AH  ; OPERATOR INTERRUPT
+ ESC   EQU 1BH
+ CR    EQU 0DH  ; CARRIAGE RETURN
+ LF    EQU 0AH  ; LINE FEED
+ CTRLZ EQU 1AH  ; OPERATOR INTERRUPT
 
 ; CP/M FUNCTIONS AND ADDRESSES
-
-RCHAR   EQU   1 ; READ CON: INTO (A)
-WCHAR   EQU   2 ; WRITE (A) TO CON:
-CPRINTS EQU   9 ; PRINT STRING WITH $ TERMINATOR
-BDOS    EQU   5 ; SYSTEM CALL ENTRY (BDOS)
+ RCHAR   EQU   1 ; READ CON: INTO (A)
+ WCHAR   EQU   2 ; WRITE (A) TO CON:
+ CPRINTS EQU   9 ; PRINT STRING WITH $ TERMINATOR
+ BDOS    EQU   5 ; SYSTEM CALL ENTRY (BDOS)
 
 ;-------------------------------------------------------------------------
 ; Program loads and enters at 0100h
 ;-------------------------------------------------------------------------
-
-ORG 0100H           ; START OF TRANS. PROGRAM AREA
-
+ ORG 0100H           ; START OF TRANS. PROGRAM AREA
 
 ; Main consol output routine using CPM.
 ; All registers unchanged
 
-MAIN:
- LD DE,CLS   ; Load CLS clear screen string
+ MAIN:
+     LD DE,CLS   ; Load CLS clear screen string
      LD C,CPRINTS  ; Prepare for Write clear screen string
      CALL BDOS   ; Ask system to do it
 
-
-KEYLOOP:
+ KEYLOOP:
      LD DE,INMSG  ; Load message asking for a key to press
      LD C,CPRINTS  ; Prepare for Write the message string
      CALL BDOS   ; Ask system to do it
 
- LD C,RCHAR  ; Prepare for reading one character into [C].
- CALL BDOS   ; Ask system to do it
+     LD C,RCHAR  ; Prepare for reading one character into [C].
+     CALL BDOS   ; Ask system to do it
 
- CP 51H   ; Compare 'Q' key (code 51 in hex), sets Zero Flag
- JP Z,EXITP  ; Jump to EXITP if Zero Flag set
- CP 71H   ; Compare 'q' key (code 71 in hex), sets Zero Flag
- JP Z,EXITP  ; Jump to EXITP if Zero Flag set
+     CP 51H   ; Compare 'Q' key (code 51 in hex), sets Zero Flag
+     JP Z,EXITP  ; Jump to EXITP if Zero Flag set
+     CP 71H   ; Compare 'q' key (code 71 in hex), sets Zero Flag
+     JP Z,EXITP  ; Jump to EXITP if Zero Flag set
 
- LD A,C   ; Save C into A if other key than Q or q
+     LD A,C   ; Save C into A if other key than Q or q
 
- PUSH  AF
-     PUSH  BC
-     PUSH  DE
+     PUSH AF
+     PUSH BC
+     PUSH DE
 
      LD DE,OUTMSG
      LD C,CPRINTS
      CALL BDOS
 
- POP DE
+     POP DE
      POP BC
      POP AF
 
      LD E,C
- LD C,WCHAR  ; Character to be sent in [C].
+     LD C,WCHAR  ; Character to be sent in [C].
      CALL BDOS
 
- LD A,C
+     LD A,C
 
- PUSH  AF
-     PUSH  BC
-     PUSH  DE
+     PUSH AF
+     PUSH BC
+     PUSH DE
 
- LD DE,HEXMSG
+     LD DE,HEXMSG
      LD C,CPRINTS
      CALL BDOS
 
- POP   DE
-     POP   BC
-     POP   AF
+     POP DE
+     POP BC
+     POP AF
 
- PUSH AF
- SRL A
-    SRL A
+     PUSH AF
+     SRL A
+     SRL A
      SRL A
      SRL A
      CALL CONHEX
@@ -91,37 +86,37 @@ KEYLOOP:
      CALL CONHEX
      LD (HEX+1),A
 
- LD C,CPRINTS  ;WRITESTR
+     LD C,CPRINTS  ;WRITESTR
      LD DE,HEX
      CALL BDOS 
 
- JP KEYLOOP  ; Until 'Q' or 'q', stay into the loop
+     JP KEYLOOP  ; Until 'Q' or 'q', stay into the loop
 
-CONHEX:
+ CONHEX:
      AND 0FH
      ADD A,30H
      CP 3AH
      JP M,EXITP
      ADD A,7
 
-EXITP:
+ EXITP:
      RET
+ 
+ CLS:
+  DB 1BH,"[H",1BH,"[2J$" ; VT100 for more info see
+; DB ESC,"H",ESC,"E$" ; For Amstrad PCW 8256
+; https://en.wikipedia.org/wiki/ANSI_escape_code#CP/M
+ 
+ INMSG:
+  DB 'Press any key (Q or q to quit): $'
 
-HEX:
-     DB "00",CR,LF,"$"
+ OUTMSG:
+  DB CR,LF,'You chose: $'
 
-CLS:
- DB ESC,"H",ESC,"E$" ; For Amstrad PCW
+ HEXMSG:
+  DB CR,LF,'In HEX: $'
 
-INMSG:
- DB CR,LF,CR,LF,'Any key (Q to quit): $'
+  HEX:
+  DB "00",CR,LF,CR,LF,"$" ; 2 bytes for HEX value
 
-OUTMSG:
- DB CR,LF,'You chose: $'
-
-HEXMSG:
- DB CR,LF,'In HEX: $'
-
-END
-
-
+ END

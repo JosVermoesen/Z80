@@ -1,0 +1,68 @@
+ .Z80
+ TITLE 'Fibonacci Sequence - According chatGPT :)' 
+;-------------------------------------------------------------------------
+; CP/M Demo Program
+;-------------------------------------------------------------------------
+ ESC      EQU   001BH
+ RCHAR    EQU   0001H    ; READ CHAR FROM CONSOLE INTO ACCUMULATOR
+ CPM      EQU   0005H    ; Jump vector to CPM (BDOS)
+ 
+ PCHAR    EQU   0002H    ; BDOS write a character to the console
+ PSTRING  EQU   0009H    ; BDOS write a string to the console
+ CR       EQU   000DH    ; ASCII carriage return (13 in decimal)
+ LF       EQU   000AH    ; ASCII line feed (10 in decimal)
+ 
+ DFCB     EQU   005CH    ; 92 in decimal
+ FCBEXT   EQU   0065H    ; 101 in decimal
+
+;-------------------------------------------------------------------------
+; Program loads and enters at 0100h
+;-------------------------------------------------------------------------
+ ORG 0100H        ; CP/M expects programs at 0100h
+
+ MAIN:
+  LD DE,CLS      ; LOAD ANSI CLS STRING INTO REGISTER PAIR DE
+  ;LD DE,CLSPCW   ; USE A DIFFERENT CLS STRING FOR AMSTRAD PCW
+  LD C,PSTRING   ; PREPARE TO WRITE THE CLS STRING
+  CALL CPM
+
+  LD B,233        ; SET B TO MAX VALUE OF 8 BIT DEMO (FIBONACCI)  
+  LD A,0          ; A START WITH VALUE 0
+  LD D,A          ; D GETS PREVIOUS VALUE OF A
+  LD A,1
+
+LOOP:
+  PUSH  AF        ; SAVE REGISTERS BEFORE USING CPM IN/OUT FUNCTIONS
+  PUSH  BC        ; DEFINED ABOVE (PCHAR, PSTRING, RCHAR)
+  PUSH  DE        ; SEE ALSO POP IN REVERSE FOLOWING LINES!
+
+  LD A,D          ; LOAD VALUE OF D INTO REGISTER A
+  LD E,A          ; STORE VALUE OF A IN REGISTER E
+  LD C,PCHAR      ; USE REGISTER C TO SET PRINT_CHARACTER READY FOR CPM
+  CALL CPM        ; LET CPM DO THE JOB
+
+  POP DE          ; GET REGISTER VALUES BACK SAVED BEFORE TO RESUME
+  POP BC          
+  POP AF          ; BE SURE GETTING BACK IN REVERSE
+
+  CP B            ; COMPARE VALUE OF A WITH VALUE OF B
+  JP Z,LAST       ; Z FLAG IS SET WHEN VALUE A = B VALUE
+                  ; IF SO, THEN JUMP TO LABEL LAST OTHERWISE RESUME NEXT
+  JP LOOP         ; KEEP ON LOOPING (Z FLAG IS NOT SET)
+  
+LAST:             ; PRINT LAST FIBONACCI NUMBER
+ PUSH AF
+ LD A,D
+ LD C,PCHAR
+ CALL CPM
+ POP AF
+
+ RET
+  
+; CLSPCW:              ; FOR AMSTRAD PCW
+;  DB ESC,"H",ESC,"E$"
+
+ CLS:                 ; https://en.wikipedia.org/wiki/ANSI_escape_code#CP/M
+     DB 1BH,"[H",1BH,"[2J$"
+
+ END
