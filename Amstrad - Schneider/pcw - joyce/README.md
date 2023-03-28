@@ -1,5 +1,7 @@
 # Amstrad PCW - Schneider JOYCE
 
+[PCW-ADVERTENTIE][DIDECAR]
+
 ## Emulators
 
 ### [Habisoft][habisoft]
@@ -9,11 +11,12 @@ A free emulator on Windows for the Amstrad PCW (Schneider JOYCE) computer.
 ### [Vsoft MAR][prg]
 
 <p align="center">
-  <img src="Images/VSOFT-MAR-PCW-SCREEN.jpg" alt="PCW-MAR" />
+  <img src="https://pcw.vsoft.be/sources/VSOFT-MAR-PCW-SCREEN.jpg" alt="PCW-MAR" />
   
-  <i>An accounting program for the Amstrad PCW (Schneider JOYCE) computer from 1985 - 1987 by Vsoft written in Mallard BASIC. The program is available in the [MAR-1987][prg] folder on .dsk image file format. The source code is not protected and can be used for your own purposes.</i>
-  
+  <i>An accounting program for the Amstrad PCW (Schneider JOYCE) computer from 1985 - 1987 by Vsoft written in Mallard BASIC. The program is available in the [MAR-1987][prg] folder on .dsk image file format. The source code is not protected and can be used for your own purposes.</i>  
 </p>
+
+![PCW-MAR](https://pcw.vsoft.be/sources/VSOFT-MAR-PCW-SCREEN.jpg)
 
 ## Documentation
 
@@ -50,3 +53,5 @@ A German based Usergroup for the Amstrad PCW (Schneider JOYCE) computer.
 [wikipedia]: https://en.wikipedia.org/wiki/Amstrad_PCW
 [fvempel]: https://www.fvempel.nl/
 [prg]: MAR-1987/README.md
+
+[DIDECAR]: https://pcw.vsoft.be/sources/DIDECAR-JOYCE-PCW-ADVERT-DEC1985.pdf
