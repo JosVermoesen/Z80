@@ -64,9 +64,9 @@
  CLSPCW:              ; FOR AMSTRAD PCW
   DB ESC,"H",ESC,"E$"
 
- END
-
  CLS:                 ; https://en.wikipedia.org/wiki/ANSI_escape_code#CP/M
      DB 1BH,"[H",1BH,"[2J$"
+ 
+ END
 
 

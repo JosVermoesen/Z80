@@ -1,0 +1,47 @@
+;-------------------------------------------------------------------------
+; CP/M Demo Program
+;-------------------------------------------------------------------------
+ ESC      EQU   001BH
+ RCHAR    EQU   0001H    ; READ CHAR FROM CONSOLE INTO ACCUMULATOR
+ CPM      EQU   0005H    ; Jump vector to CPM (BDOS)
+ 
+ PCHAR    EQU   0002H    ; BDOS write a character to the console
+ PSTRING  EQU   0009H    ; BDOS write a string to the console
+ CR       EQU   000DH    ; ASCII carriage return (13 in decimal)
+ LF       EQU   000AH    ; ASCII line feed (10 in decimal)
+
+ORG 0100h    ; Set the program start address
+
+start:
+    ld hl, fibo   ; Load the address of the first Fibonacci number
+    ld b, 0       ; Initialize the loop counter
+    ld c, 1       ; Initialize the second Fibonacci number
+    ld a, 10      ; Set the limit of the sequence to 10
+
+loop:
+    cp 0          ; Check if we have reached the limit
+    jp z,done     ; If so, jump to the end of the program
+
+    push bc      ; Save the current Fibonacci number
+
+    LD C,PCHAR   ; WRITE A CHARACTER TO THE CONSOLE
+    CALL CPM     ; CALL THE CPM (BDOS)
+    add hl, bc   ; Calculate the next Fibonacci number
+    pop bc       ; Restore the previous Fibonacci number
+    ld (hl), c   ; Store the new Fibonacci number
+
+    inc b        ; Increment the loop counter
+    ld c, b      ; Set the next Fibonacci number to be the sum of the previous two
+
+    dec a        ; Decrement the limit counter
+    jr loop      ; Loop back to the beginning
+
+done:
+    ret          ; End the program
+
+fibo:           ; The memory location where the Fibonacci sequence will be stored
+    defw 0      ; The first Fibonacci number (0)
+    defw 1      ; The second Fibonacci number (1)
+    defw 0,0,0,0,0,0,0,0,0,0  ; Reserve space for the rest of the sequence
+
+end

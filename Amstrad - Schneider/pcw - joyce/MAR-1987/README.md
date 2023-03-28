@@ -1,6 +1,8 @@
-# INSTRUCTIES VOOR PCW CP/M BOX
+# INSTRUCTIES VOOR PCW CP/M BOX EMULATOR
 
-## MAAK EEN 'PROGRAMMA START .DSK' VOOR DRIVE B:
+Zie ook: [PDF Scan van handleiding 1987][pdf]
+
+## MAAK EEN 'PROGRAMMA START .DSK' VOOR DRIVE B
 
 - Duidt voor opstart van CP/M BOX voor A: het PCW 8256 [B] CPM PLUS.dsk
   (of een kopij ervan) aan, alsook een blanco CF2DD .DSK voor drive B:
@@ -27,7 +29,7 @@
 - Vervang distributie .DSK kant A door .DSK voor kant B
   Tijp in: b:submit 8512b en sluit af met ENTER/RETURN
 
-## DATA .DSK VIRTUELE A: EN B:
+## DATA .DSK VIRTUELE A: EN B
 
 - VOORZIE EEN BLANCO CF2 VIRTUEEL .DSK BESTAND VOOR DRIVE A:
 - VOORZIE EEN BLANCO CF2DD .DSK BESTAND VOOR DRIVE B:
@@ -68,3 +70,5 @@
 
 Veel vintage pret met ons MALLARD BASIC boekhoudprogramma!
 Jos VERMOESEN
+
+[pdf]: VSOFT-MAR-PCW-1987-NL.pdf
