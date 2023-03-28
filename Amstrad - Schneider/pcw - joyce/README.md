@@ -10,13 +10,9 @@ A free emulator on Windows for the Amstrad PCW (Schneider JOYCE) computer.
 
 ### [Vsoft MAR][prg]
 
-<p align="center">
-  <img src="https://pcw.vsoft.be/sources/VSOFT-MAR-PCW-SCREEN.jpg" alt="PCW-MAR" />
-  
-  <i>An accounting program for the Amstrad PCW (Schneider JOYCE) computer from 1985 - 1987 by Vsoft written in Mallard BASIC. The program is available in the [MAR-1987][prg] folder on .dsk image file format. The source code is not protected and can be used for your own purposes.</i>  
-</p>
-
 ![PCW-MAR](https://pcw.vsoft.be/sources/VSOFT-MAR-PCW-SCREEN.jpg)
+
+An accounting program for the Amstrad PCW (Schneider JOYCE) computer from 1985 - 1987 by Vsoft written in Mallard BASIC. The program is available in the [MAR-1987][prg] folder on .dsk image file format. The source code is not protected and can be used for your own purposes.
 
 ## Documentation
 
