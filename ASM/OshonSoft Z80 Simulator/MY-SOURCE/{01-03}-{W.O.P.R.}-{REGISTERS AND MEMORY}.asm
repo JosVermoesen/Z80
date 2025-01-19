@@ -1,5 +1,6 @@
 ; PLAYLIST
 ; https://www.youtube.com/watch?v=O4IgYgnT6qU&list=PLrIwy5Fq_HiPDD1T_LTHX8yuuCxKI4vcm
+; use memory editor window to check the values when storing or saving
 
 	.ORG 0000H  ; RECOMMENDED ADDRESS FOR THE SIMULATOR
 
