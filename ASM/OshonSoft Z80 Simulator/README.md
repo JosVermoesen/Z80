@@ -5,3 +5,7 @@ This is a Z80 processor simulator for Windows. You can evaluate it for 30 days. 
 [Z80 Simulator Home Page](https://www.oshonsoft.com/z80.php)
 
 [Download Area](https://www.oshonsoft.com/downloads.php)
+
+## Recommended vscode extentions
+
+- Z80 Assembly (Imanolea)
